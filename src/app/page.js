@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Countries from "./countries/page";
+import Countries from "./countries1/page";
 
 export default function Home() {
   return (
