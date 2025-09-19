@@ -1,5 +1,6 @@
 import Image from "next/image";
-import Countries from "./countries1/page";
+import Countries from "./countries/page";
+import { fetchCountries } from "@/lib/features/countries/countriesSlice";
 
 export default function Home() {
   return (
