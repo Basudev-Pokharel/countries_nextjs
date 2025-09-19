@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Countries from "./countries/page";
 import { fetchCountries } from "@/lib/features/countries/countriesSlice";
