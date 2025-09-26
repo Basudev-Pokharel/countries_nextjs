@@ -16,7 +16,7 @@ const Countries = () => {
   useEffect(() => {
     dispatch(fetchCountries());
   }, [dispatch]);
-  console.log("Lis of countries:", countries);
+  // console.log("Lis of countries:", countries);
 
   const getCurrency = (currency) => {
     for (let i in key) {
