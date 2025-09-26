@@ -3,6 +3,7 @@ import {
   clearSelectedCountry,
   setSelectedCountry,
   selectCountryByName,
+  fetchCountries,
 } from "@/lib/features/countries/countriesSlice";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import {
@@ -36,6 +37,11 @@ const CountryPage = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [weatherLoading, setWeatherLoading] = useState(false);
   const [weatherError, setWeatherError] = useState(null);
+  useEffect(() => {
+    if (countries.length == 0) {
+      dispatch(fetchCountries());
+    }
+  }, []);
 
   const fetchWeatherData = async (capital) => {
     if (!capital) return;

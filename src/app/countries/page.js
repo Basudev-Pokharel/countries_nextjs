@@ -8,10 +8,17 @@ import Typography from "@mui/material/Typography";
 import Image from "next/image";
 import CardMedia from "@mui/material/CardMedia";
 import { Box } from "@mui/material";
+import { useRouter } from "next/navigation";
+import { CardActionArea } from "@mui/material";
 
 const Countries = () => {
   const countries = useSelector((state) => state.countries.countries);
   let dispatch = useDispatch();
+  const router = useRouter();
+  const handleCountryClick = (countryName) => {
+    const slug = countryName.toLowerCase().replace(/\s+/g, "-");
+    router.push(`/countries/${encodeURIComponent(slug)}`);
+  };
 
   useEffect(() => {
     dispatch(fetchCountries());
@@ -36,7 +43,7 @@ const Countries = () => {
       {countries.map((country, idx) => {
         return (
           <Card
-            key={idx}
+            key={country.name.common}
             sx={{
               padding: "1px",
               width: "300px",
@@ -54,15 +61,19 @@ const Countries = () => {
               src={country.flags.svg}
               alt={country.name.common}
             />
-            <CardContent>
-              <Typography variant="h6">{country.name.common}</Typography>
-              <Typography variant="h8">{country.population}</Typography>
-              <Typography variant="h8">
-                {() => {
-                  getCurrency(country.currencies);
-                }}
-              </Typography>
-            </CardContent>
+            <CardActionArea
+              onClick={() => handleCountryClick(country.name.common)}
+            >
+              <CardContent>
+                <Typography variant="h6">{country.name.common}</Typography>
+                <Typography variant="h6">{country.population}</Typography>
+                <Typography variant="p">
+                  {() => {
+                    getCurrency(country.currencies);
+                  }}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
           </Card>
         );
       })}
