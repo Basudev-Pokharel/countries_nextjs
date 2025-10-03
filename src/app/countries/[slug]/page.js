@@ -41,7 +41,7 @@ const CountryPage = () => {
     if (countries.length == 0) {
       dispatch(fetchCountries());
     }
-  }, []);
+  }, [countries.length, dispatch]);
 
   const fetchWeatherData = async (capital) => {
     if (!capital) return;
