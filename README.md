@@ -29,4 +29,9 @@ This project was created as part of the **React Advanced Course**. It is a fully
   <img src="public/screenshots/mobile_drawer.png" alt="Favorites Page" width="400" />
 </p>
 
+## Connect & Demo 🔗
+
+- **LinkedIn:** [Basu](https://www.linkedin.com/in/basudev-pokharel/)
+- **Vercel Deployment:** [View Live Project](https://countries-nextjs-mine.vercel.app/)
+
 Note: I will keep updating if eveything favours me
