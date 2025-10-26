@@ -57,6 +57,7 @@ const page = () => {
       });
     }
   }, [countriesData]);
+
   async function getLatLon(city) {
     let GeoData = await fetch(
       // `https://nominatim.openstreetmap.org/search?format=json&q=${city}`
