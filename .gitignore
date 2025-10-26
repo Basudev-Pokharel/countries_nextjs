@@ -10,6 +10,9 @@
 !.yarn/releases
 !.yarn/versions
 
+#Thought to not publish the maps folder as of now
+/src/app/maps
+
 # testing
 /coverage
 

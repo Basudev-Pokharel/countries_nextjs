@@ -1,9 +1,10 @@
 "use client";
+import { useAuth } from "@/app/context/AuthContext";
+import FavouriteButton from "@/components/FavouriteButton";
 import {
   clearSelectedCountry,
-  setSelectedCountry,
-  selectCountryByName,
   fetchCountries,
+  setSelectedCountry,
 } from "@/lib/features/countries/countriesSlice";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import {
@@ -27,26 +28,32 @@ const CountryPage = () => {
   const { slug } = useParams();
   const router = useRouter();
   const dispatch = useDispatch();
+  const { user } = useAuth();
 
   // 2. Get country data from Redux store
   const { selectedCountry, loading, error, countries } = useSelector(
     (state) => state.countries
   );
 
+  console.log("Countries from SinglePage: ", selectedCountry);
+
+  useEffect(() => {
+    if (countries.length === 0) {
+      dispatch(fetchCountries());
+    }
+  });
+
   // 3. Weather state (we'll add this functionality later)
   const [weatherData, setWeatherData] = useState(null);
   const [weatherLoading, setWeatherLoading] = useState(false);
   const [weatherError, setWeatherError] = useState(null);
-  useEffect(() => {
-    if (countries.length == 0) {
-      dispatch(fetchCountries());
-    }
-  }, [countries.length, dispatch]);
 
   const fetchWeatherData = async (capital) => {
     if (!capital) return;
+
     setWeatherLoading(true);
     setWeatherError(null);
+
     try {
       const API_KEY = process.env.NEXT_PUBLIC_OPENWEATHERAPI;
       const response = await fetch(
@@ -54,9 +61,11 @@ const CountryPage = () => {
           capital
         )}&appid=${API_KEY}&units=metric`
       );
+
       if (!response.ok) {
         throw new Error("Weather data not available");
       }
+
       const data = await response.json();
       setWeatherData(data);
     } catch (err) {
@@ -66,6 +75,7 @@ const CountryPage = () => {
       setWeatherLoading(false);
     }
   };
+
   useEffect(() => {
     if (selectedCountry?.capital?.[0]) {
       fetchWeatherData(selectedCountry.capital[0]);
@@ -193,6 +203,12 @@ const CountryPage = () => {
       >
         Back to Countries
       </Button>
+
+      {user && (
+        <Box>
+          <FavouriteButton country={selectedCountry} />
+        </Box>
+      )}
 
       {/* Main Content */}
       <Paper elevation={3} sx={{ p: 4 }}>

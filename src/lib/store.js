@@ -1,14 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import countriesReducer from "./features/countries/countriesSlice";
-// import favouritesReducer from "./features/favourites/favouritesSlice";
-// import profileReducer from "@app/profile/profileSlice";
+import favouritesReducer from "./features/favourites/favouritesSlice";
 import profileReducer from "./features/profile/profileSlice";
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       countries: countriesReducer,
-      // favourites: favouritesReducer,
+      favourites: favouritesReducer,
       profile: profileReducer,
     },
   });
