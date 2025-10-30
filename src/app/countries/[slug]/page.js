@@ -15,6 +15,7 @@ import {
   Chip,
   Divider,
   Grid,
+  Link,
   Paper,
   Typography,
 } from "@mui/material";
@@ -291,6 +292,18 @@ const CountryPage = () => {
                             sx={{ mr: 1, mb: 1 }}
                           />
                         ))}
+                    </Box>
+                    <Box>
+                      <Typography variant="subtitle1" fontWeight="bold">
+                        Read More on{" "}
+                        <Link
+                          href={`https://en.wikipedia.org/wiki/${selectedCountry.name.common}`}
+                          underline="always"
+                          target="_main"
+                        >
+                          WikiPedia
+                        </Link>
+                      </Typography>
                     </Box>
                   </Box>
                 </Box>
